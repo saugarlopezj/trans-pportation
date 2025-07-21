@@ -7,5 +7,5 @@ It aims to provide insightful analyses and intuitive visual tools to better unde
 ## Structure
 
 The structure of this application is a R packages. This documentation is used: 
-https://r-pkgs.org/
-https://usethis.r-lib.org/ 
+- https://r-pkgs.org/
+- https://usethis.r-lib.org/ 
