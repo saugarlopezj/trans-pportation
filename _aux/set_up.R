@@ -17,7 +17,7 @@ load_package <- function(pkg) {
 }
 
 ## Set packages to load ----
-packages <- c("rvest", "tidyverse")
+packages <- c("rvest", "tidyverse", "selenider", "selenium", "chromote")
 
 # Load packages
 invisible(lapply(packages, load_package))
