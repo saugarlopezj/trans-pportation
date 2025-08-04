@@ -19,7 +19,9 @@ load_package <- function(pkg) {
 }
 
 ## Set packages to load ----
-packages <- c("rvest", "tidyverse", "selenider", "RSelenium", "chromote")
+packages <- c("rvest", "tidyverse",
+              "selenider", "RSelenium",
+              "chromote", "httr", "readxl")
 
 
 # Load packages
