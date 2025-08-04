@@ -11,13 +11,18 @@ load_package <- function(pkg) {
   }
   
   # Load package if is not in the global environment
-  if (!pkg %in% loadedNamespaces()) {
+  tryCatch({
     suppressPackageStartupMessages(library(pkg, character.only = TRUE))
-  }
+  }, error = function(e) {
+    message(sprintf("Error loading package '%s': %s", pkg, e$message))
+  })
 }
 
 ## Set packages to load ----
-packages <- c("rvest", "tidyverse", "selenider", "selenium", "chromote")
+packages <- c("rvest", "tidyverse", "selenider", "RSelenium", "chromote")
+
 
 # Load packages
 invisible(lapply(packages, load_package))
+
+rm(list = c("load_package", "packages"))
