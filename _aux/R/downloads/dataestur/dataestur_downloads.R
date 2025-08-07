@@ -26,8 +26,10 @@ download_aena_data <- function(params_df, endpoint = "AENA_DESTINOS_DL", sleep_t
     
     tryCatch({
       df <- get_dataestur_df(query)[[1]]
-      df$AEROPUERTO <- airport
+      print(head(df))
       df
+      
+      
     }, error = function(e) {
       message("Error in airport: ", airport)
       return(NULL)
@@ -72,14 +74,14 @@ params_df <- expand_grid(
 )
 
 
-airport_params <- tibble(airports = airports_code$AENA_NAME)
+airport_params <- tibble(airport = airports_code$AENA_NAME)
 
-df_airports <- download_aena_data(airports)
-
-
+df_airports <- download_aena_data(airport_params, sleep_time = 8)
 
 
 
+
+save(df_airports, file = "_aux/data/df_airports.RData")
 
 
 
