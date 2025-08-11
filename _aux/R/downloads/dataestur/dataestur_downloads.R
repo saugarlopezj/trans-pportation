@@ -3,7 +3,9 @@
 ## Load functions and dataframe ----
 
 source("_aux/R/downloads/dataestur/dataestur_functions.R")
-load("_aux/data/airports_code.RData")
+load("_aux/data/airports_code.rda")
+load("_aux/data/variable_ids.rda")
+
 
 
 ## Get data frame ----
@@ -45,7 +47,8 @@ airport_params <- tibble(airport = airports_code$AENA_NAME)
 
 df_airports <- download_aena_data(airport_params, sleep_time = 8)
 
-
+# Process data ----
+tidy_data <- tidy_aenadata(df_airports, airports_code, variable_ids) 
 
 
 save(df_airports.rda, file = "_aux/data/df_airports.rda")
@@ -59,5 +62,7 @@ save(df_airports.rda, file = "_aux/data/df_airports.rda")
 
 
 
-
 ## Process data ----
+
+
+
