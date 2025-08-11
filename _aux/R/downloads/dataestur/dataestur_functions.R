@@ -59,11 +59,6 @@ construct_urls <- function(endpoints, params, .url =  "https://dataestur.azure-a
   return(urls)
 }
 
-
-
-# Process data ----
-
-
 #' Get Data from Dataestur API
 #' 
 #' @param urls 
@@ -136,14 +131,14 @@ get_dataestur_df <- function(.url) {
 #' @param endpoint 
 #' @param sleep_time 
 #'
-#' @returns
+#' @returns A data frame with the results of the queries.
 #' @export
 #'
 #' @examples
 #' load("_aux/data/airports_code.RData")
 #' airport_params <- tibble(airport = airports_code$AENA_NAME)
 #' df_airports <- download_aena_data(airport_params, sleep_time = 8)
- 
+
 download_aena_data <- function(params_df, endpoint = "AENA_DESTINOS_DL", sleep_time = 6) {
   
   df_airports <- pmap_df(params_df, function(airport, year = NULL, month = NULL) {
@@ -180,5 +175,33 @@ download_aena_data <- function(params_df, endpoint = "AENA_DESTINOS_DL", sleep_t
 }
 
 
+# Process data ----
+
+
+
+
+#' Process aena data
+#'
+#' @param data 
+#' @param aiports_code 
+#' @param variables_id 
+#' @param column_name 
+#'
+#' @returns A tidy data frame with the processed AENA data.
+#' @export
+#'
+#' @examples
+tidy_aenadata <- function(data, aiports_code, variables_id, column_name = "PASAJEROS_POR_DESTINO"){
+  tidy_data <- data %>% 
+    mutate(
+      MES = str_pad(MES, width = 2, pad = "0"),
+      date = paste0(AÑO, "-", MES, "-01"), 
+      original_name = column_name
+    ) %>% 
+    inner_join(variable_ids, by = "original_name") %>%
+    inner_join(airports_code, by = "AEROPUERTO_AENA") %>% 
+    rename(variable_value = !!column_name ) %>% 
+    select(date, variable_id, IATA, variable_value)
+}
 
 
