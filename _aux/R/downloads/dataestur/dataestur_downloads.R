@@ -4,40 +4,7 @@
 
 source("_aux/R/downloads/dataestur/dataestur_functions.R")
 load("_aux/data/airports_code.RData")
-download_aena_data <- function(params_df, endpoint = "AENA_DESTINOS_DL", sleep_time = 6) {
-  
-  df_airports <- pmap_df(params_df, function(airport, year = NULL, month = NULL) {
-    
-    # Construye solo los parámetros no nulos
-    params <- list("Aeropuerto AENA" = airport)
-    
-    if (!is.null(year) && !is.null(month)) {
-      params[["desde (año)"]] <- year
-      params[["desde (mes)"]] <- month
-      params[["hasta (año)"]] <- year
-      params[["hasta (mes)"]] <- month
-    }
-    
-    # Construye URL
-    query <- construct_urls(endpoint, params)
-    print(query)
-    
-    Sys.sleep(sleep_time)
-    
-    tryCatch({
-      df <- get_dataestur_df(query)[[1]]
-      print(head(df))
-      df
-      
-      
-    }, error = function(e) {
-      message("Error in airport: ", airport)
-      return(NULL)
-    })
-  })
-  
-  return(df_airports)
-}
+
 
 ## Get data frame ----
 
@@ -81,7 +48,7 @@ df_airports <- download_aena_data(airport_params, sleep_time = 8)
 
 
 
-save(df_airports, file = "_aux/data/df_airports.RData")
+save(df_airports.rda, file = "_aux/data/df_airports.rda")
 
 
 
