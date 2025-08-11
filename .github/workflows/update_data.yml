@@ -22,8 +22,7 @@ jobs:
 
       - name: Run main script
         run: |
-         Rscript _aux/R/downloads/dataestur/dataestur_downloads.R
-
+          Rscript _aux/R/downloads/dataestur/dataestur_downloads.R
 
       - name: Commit and push changes if needed
         run: |
