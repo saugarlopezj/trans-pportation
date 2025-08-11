@@ -45,10 +45,10 @@ params_df <- expand_grid(
 
 airport_params <- tibble(airport = airports_code$AENA_NAME)
 
-df_airports <- download_aena_data(airport_params, sleep_time = 8)
+df1 <- download_aena_data(airport_params, sleep_time = 8)
 
 # Process data ----
-tidy_data <- tidy_aenadata(df_airports, airports_code, variable_ids) 
+df_airports <- tidy_aenadata(df1, airports_code, variable_ids) 
 
 
 save(df_airports.rda, file = "_aux/data/df_airports.rda")
