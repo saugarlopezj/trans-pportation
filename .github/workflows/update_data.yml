@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 6 * * *" # todos los días a las 06:00 UTC
-  workflow_dispatch:
 
 jobs:
   update-data:
