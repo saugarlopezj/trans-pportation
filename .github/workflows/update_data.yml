@@ -3,7 +3,10 @@ name: Download and Commit Data
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 6 * * *" # todos los días a las 06:00 UTC
+    # 17:00 en España en horario de invierno (CET = UTC+1 → 16:00 UTC)
+    - cron: "0 16 * * *"
+    # 17:00 en España en horario de verano (CEST = UTC+2 → 15:00 UTC)
+    - cron: "0 15 * * *"
 
 jobs:
   update-data:
@@ -13,7 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          persist-credentials: false
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
