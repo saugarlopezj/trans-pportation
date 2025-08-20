@@ -1,22 +1,25 @@
 name: Download and Commit Data
-# prueba
+
 on:
   workflow_dispatch:
   schedule:
     # 17:00 en España en horario de invierno (CET = UTC+1 → 16:00 UTC)
-    - cron: "12 17 * * *"
+    - cron: "25 17 * * *"
     # 17:00 en España en horario de verano (CEST = UTC+2 → 15:00 UTC)
-    - cron: "12 16 * * *"
+    - cron: "25 16 * * *"
 
 jobs:
   update-data:
     runs-on: ubuntu-latest
+    # Solo correr si la rama es la secundaria que nos interesa
+    if: github.ref == 'refs/heads/1-get-data-from-api-and-webscrapping-tecniques'
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          ref: '1-get-data-from-api-and-webscrapping-tecniques'
 
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
@@ -38,4 +41,3 @@ jobs:
             git push origin HEAD:${GITHUB_REF#refs/heads/}
           else
             echo "No changes detected in data/, skipping commit."
-          fi
