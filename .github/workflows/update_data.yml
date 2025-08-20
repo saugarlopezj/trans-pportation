@@ -2,6 +2,11 @@ name: Download and Commit Data
 
 on:
   workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to run workflow on'
+        default: '1-get-data-from-api-and-webscrapping-tecniques'
+        required: true
   schedule:
     # 17:00 en España en horario de invierno (CET = UTC+1 → 16:00 UTC)
     - cron: "25 17 * * *"
