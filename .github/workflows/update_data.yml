@@ -3,10 +3,7 @@ name: Download and Commit Data
 on:
   workflow_dispatch:
   schedule:
-    # 17:00 en España en horario de invierno (CET = UTC+1 → 16:00 UTC)
-    - cron: "0 17 * * *"
-    # 17:00 en España en horario de verano (CEST = UTC+2 → 15:00 UTC)
-    - cron: "0 16 * * *"
+     - cron: "*/2 * * * *"
 
 jobs:
   update-data:
