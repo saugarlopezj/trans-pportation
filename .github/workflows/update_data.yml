@@ -10,9 +10,7 @@ on:
 
 jobs:
   update-data:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/1-get-data-from-api-and-webscrapping-tecniques'
-
+    runs-on: windows-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -20,33 +18,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: '1-get-data-from-api-and-webscrapping-tecniques'
 
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            libcurl4-openssl-dev \
-            libssl-dev \
-            libxml2-dev \
-            libxt-dev \
-            chromium-browser \
-            libnss3 \
-            libgconf-2-4 \
-            libxss1 \
-            libasound2
-
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: '4.4.1'
-
-      - name: Install R dependencies
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          packages: |
-            curl
-            httr
-            selenider
-            chromote
 
       - name: Run main script
         run: |
