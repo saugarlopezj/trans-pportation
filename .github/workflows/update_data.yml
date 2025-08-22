@@ -3,10 +3,11 @@ name: Download and Commit Data
 on:
   workflow_dispatch:
   schedule:
-    # 17:30 en España en horario de invierno (CET = UTC+1 → 16:30 UTC)
-    - cron: "30 16 * * *"
-    # 17:30 en España en horario de verano (CEST = UTC+2 → 15:30 UTC)
-    - cron: "30 15 * * *"
+    - cron: "30 16 * * *" # to winter
+    - cron: "30 15 * * *" # to summer
+
+permissions:
+  contents: write   # i's needed to give permissions to write
 
 jobs:
   update-data:
@@ -39,6 +40,4 @@ jobs:
           else
             echo "No changes detected in data/, skipping commit."
           fi
-            
         shell: bash
-       
