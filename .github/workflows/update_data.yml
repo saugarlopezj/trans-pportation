@@ -38,3 +38,5 @@ jobs:
             git push origin HEAD:${GITHUB_REF#refs/heads/}
           else
             echo "No changes detected in data/, skipping commit."
+            
+        shell: bash
