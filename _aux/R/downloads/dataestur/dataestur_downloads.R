@@ -17,7 +17,7 @@ endpoints_filter <- str_subset(endpoints, "AENA_DESTINOS")
 ### Save parameters for the query ----
 
 # Airports
-airports <- airports_code$AENA_NAME
+airports <- airports_code$AEROPUERTO_AENA
 
 # Years and months
 current_date <- Sys.Date()
@@ -43,15 +43,15 @@ params_df <- expand_grid(
 )
 
 
-airport_params <- tibble(airport = airports_code$AENA_NAME)
+airport_params <- tibble(airport = airports)
 
 df1 <- download_aena_data(airport_params, sleep_time = 8)
 
-# Process data ----
+##  Process data ----
 df_airports <- tidy_aenadata(df1, airports_code, variable_ids) 
 
 
-save(df_airports.rda, file = "_aux/data/df_airports.rda")
+save(df_airports, file = "_aux/data/df_airports.rda")
 
 
 
@@ -62,7 +62,6 @@ save(df_airports.rda, file = "_aux/data/df_airports.rda")
 
 
 
-## Process data ----
 
 
 
