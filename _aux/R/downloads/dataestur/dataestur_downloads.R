@@ -19,7 +19,7 @@ endpoints_filter <- str_subset(endpoints, "AENA_DESTINOS")
 # Airports
 airports <- airports_code$AEROPUERTO_AENA
 
-print(airports)
+# print(airports)
 
 # Years and months
 current_date <- Sys.Date()
