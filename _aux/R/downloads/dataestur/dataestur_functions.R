@@ -1,4 +1,5 @@
-source("_aux/R/_setup/source_packages.R")
+source(here::here("_aux/R/_setup/source_packages.R"))
+
 
 # Download data ----
 
