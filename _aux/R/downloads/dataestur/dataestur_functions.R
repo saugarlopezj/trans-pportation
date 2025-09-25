@@ -12,10 +12,10 @@ source("_aux/R/_setup/source_packages.R")
 #' @examples
 #' 
 #' endpoints <-  get_dataestur_endpoints()
-get_dataestur_endpoints <- function(.url = "https://www.dataestur.es/en/apidata/" ){
+get_dataestur_endpoints <- function(seconds = 10, .url = "https://www.dataestur.es/en/apidata/" ){
   session <- selenider_session(
     "chromote",
-    timeout = 10,
+    timeout = seconds,
     options = chromote_options(headless = TRUE)
   )
   
