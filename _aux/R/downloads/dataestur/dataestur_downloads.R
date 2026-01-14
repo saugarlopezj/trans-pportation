@@ -2,16 +2,16 @@
 
 ## Load functions and dataframe ----
 
-source("_aux/R/downloads/dataestur/dataestur_functions.R")
-load("_aux/data/airports_code.rda")
-load("_aux/data/variable_ids.rda")
+source("_aux/R/downloads/dataestur/dataestur_functions.R") # download and tidy functions
+load("_aux/data/airports_code.rda") # airports codes with aena names
+load("_aux/data/variable_ids.rda") # variables ids with original names
+load("_aux/data/dataestur_endpoints.rda") # endpoints
 
 
 
 ## Get data frame ----
 
 ### Get endpoints ----
-endpoints <- get_dataestur_endpoints()
 endpoints_filter <- str_subset(endpoints, "AENA_DESTINOS")
 
 ### Save parameters for the query ----
@@ -45,7 +45,8 @@ params_df <- expand_grid(
 
 airport_params <- tibble(airport = airports)
 
-df1 <- download_aena_data(airport_params, sleep_time = 10)
+df1 <- download_aena_data(airport_params, sleep_time = 10,
+                          endpoint = endpoints_filter)
 
 ##  Process data ----
 df_airports <- tidy_aenadata(df1, airports_code, variable_ids) 
