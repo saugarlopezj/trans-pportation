@@ -1,10 +1,15 @@
 name: Download and Commit Data
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: "30 16 * * *" # to winter
-    - cron: "30 15 * * *" # to summer
+  schedule:                             
+    - cron: "30 13,14 * * *"
+
+
+env:
+  TZ: "Europe/Madrid"
+  SUMMER_HOUR: "15:30" # local time Madrid summer first execution
+  WINTER_HOUR: "14:30" #local time Madrid winter first execution
+  
 
 permissions:
   contents: write   # i's needed to give permissions to write
